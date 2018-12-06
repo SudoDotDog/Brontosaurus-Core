@@ -1,5 +1,7 @@
 {
     "cSpell.words": [
+        "Encryptable",
+        "deserialize",
         "tshook"
     ],
     "tslint.configFile": "typescript/tslint.json"
