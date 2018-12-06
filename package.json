@@ -1,0 +1,22 @@
+{
+  "name": "@brontosaurus/core",
+  "version": "0.0.0",
+  "description": ":zap: Lighting",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SudoDotDog/Brontosaurus-Core.git"
+  },
+  "keywords": [
+    "Zap"
+  ],
+  "author": "WMXPY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SudoDotDog/Brontosaurus-Core/issues"
+  },
+  "homepage": "https://github.com/SudoDotDog/Brontosaurus-Core#readme"
+}
