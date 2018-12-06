@@ -1,22 +1,56 @@
 {
-  "name": "@brontosaurus/core",
-  "version": "0.0.0",
-  "description": ":zap: Lighting",
-  "main": "dist/index.js",
-  "scripts": {
-    "test": "mocha"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SudoDotDog/Brontosaurus-Core.git"
-  },
-  "keywords": [
-    "Zap"
-  ],
-  "author": "WMXPY",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/SudoDotDog/Brontosaurus-Core/issues"
-  },
-  "homepage": "https://github.com/SudoDotDog/Brontosaurus-Core#readme"
+	"name": "@brontosaurus/core",
+	"version": "0.0.0",
+	"description": ":zap: Lighting",
+	"main": "dist/index.js",
+	"scripts": {
+		"test": "mocha"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SudoDotDog/Brontosaurus-Core.git"
+	},
+	"keywords": [
+		"Zap"
+	],
+	"author": "WMXPY",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SudoDotDog/Brontosaurus-Core/issues"
+	},
+	"homepage": "https://github.com/SudoDotDog/Brontosaurus-Core#readme",
+	"devDependencies": {
+		"@types/chai": "^4.1.7",
+		"@types/chance": "^1.0.1",
+		"@types/mocha": "^5.2.5",
+		"@types/node": "^10.12.12",
+		"chai": "^4.2.0",
+		"chance": "^1.0.18",
+		"mocha": "^5.2.0",
+		"ts-node": "^7.0.1",
+		"tslint": "^5.11.0",
+		"typescript": "^3.2.1"
+	},
+	"nyc": {
+		"extension": [
+			".ts",
+			".tsx"
+		],
+		"include": [
+			"script/**/*.ts",
+			"src/**/*.ts",
+			"src/**/*.tsx"
+		],
+		"instrument": true,
+		"reporter": [
+			"json",
+			"text-summary"
+		],
+		"report-dir": "coverage",
+		"require": [
+			"./test/tshook.js",
+			"./test/mock.ts"
+		],
+		"sourceMap": true
+	}
 }
