@@ -2,6 +2,8 @@
     "cSpell.words": [
         "Encryptable",
         "deserialize",
+        "ifeq",
+        "setx",
         "tshook"
     ],
     "tslint.configFile": "typescript/tslint.json"
