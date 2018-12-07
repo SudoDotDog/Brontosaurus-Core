@@ -1,22 +1,28 @@
 /**
  * @author WMXPY
- * @namespace Util
+ * @namespace Brontosaurus
  * @description Crypto
  */
 
 import { createHmac, Hmac } from 'crypto';
-import { EncryptableObject } from "./declare";
+import { IEncryptableObject } from "./declare";
 
-export const encryptObject = (object: EncryptableObject, secret: string): string => {
+export const encryptObject = (object: IEncryptableObject, secret: string): string => {
 
     const json: string = JSON.stringify(object);
 
+    return encryptString(json, secret);
+};
+
+export const encryptString = (target: string, secret: string): string => {
+
     const hmac: Hmac = createHmac('sha256', secret);
-    hmac.update(json);
+    hmac.update(target);
+
     return hmac.digest('hex');
 };
 
-export const serializeObject = (object: EncryptableObject): string => {
+export const serializeObject = (object: IEncryptableObject): string => {
 
     const json: string = JSON.stringify(object);
 
@@ -26,12 +32,12 @@ export const serializeObject = (object: EncryptableObject): string => {
     return base64;
 };
 
-export const deserializeString = (base64: string): EncryptableObject => {
+export const deserializeString = (base64: string): IEncryptableObject => {
 
     const buffer: Buffer = Buffer.from(base64, 'base64');
     const content: string = buffer.toString('utf8');
 
-    const object: EncryptableObject = JSON.parse(content);
+    const object: IEncryptableObject = JSON.parse(content);
 
     return object;
 };

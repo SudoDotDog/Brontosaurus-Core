@@ -7,8 +7,8 @@
 
 import { expect } from 'chai';
 import * as Chance from 'chance';
-import { deserializeString, encryptObject, serializeObject } from '../../src/util/crypto';
-import { EncryptableObject } from '../../src/util/declare';
+import { deserializeString, encryptObject, serializeObject } from '../src/crypto';
+import { EncryptableObject } from '../src/declare';
 
 describe('Given [Crypto] help functions', (): void => {
 
