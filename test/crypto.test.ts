@@ -8,7 +8,7 @@
 import { expect } from 'chai';
 import * as Chance from 'chance';
 import { deserializeString, encryptObject, serializeObject } from '../src/crypto';
-import { EncryptableObject } from '../src/declare';
+import { IEncryptableObject } from '../src/declare';
 
 describe('Given [Crypto] help functions', (): void => {
 
@@ -21,7 +21,7 @@ describe('Given [Crypto] help functions', (): void => {
             const key: string = chance.string();
             const value: string = chance.string();
 
-            const object: EncryptableObject = {
+            const object: IEncryptableObject = {
                 [key]: value,
             };
 
@@ -37,7 +37,7 @@ describe('Given [Crypto] help functions', (): void => {
             const key: string = chance.string();
             const value: string = chance.string();
 
-            const object: EncryptableObject = {
+            const object: IEncryptableObject = {
                 [key]: value,
             };
 
@@ -54,7 +54,7 @@ describe('Given [Crypto] help functions', (): void => {
             const key: string = chance.string();
             const value: string = chance.string();
 
-            const object: EncryptableObject = {
+            const object: IEncryptableObject = {
                 [key]: value,
             };
 
@@ -68,7 +68,7 @@ describe('Given [Crypto] help functions', (): void => {
             const key: string = chance.string();
             const value: string = chance.string();
 
-            const object: EncryptableObject = {
+            const object: IEncryptableObject = {
                 [key]: value,
             };
 
