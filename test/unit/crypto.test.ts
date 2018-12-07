@@ -7,12 +7,12 @@
 
 import { expect } from 'chai';
 import * as Chance from 'chance';
-import { deserializeString, encryptObject, serializeObject } from '../src/crypto';
-import { IEncryptableObject } from '../src/declare';
+import { deserializeString, encryptObject, serializeObject } from '../../src/crypto';
+import { IEncryptableObject } from '../../src/declare';
 
 describe('Given [Crypto] help functions', (): void => {
 
-    const chance: Chance.Chance = new Chance('util-crypto');
+    const chance: Chance.Chance = new Chance('brontosaurus-crypto');
 
     describe('Given [encryptObject] function', (): void => {
 

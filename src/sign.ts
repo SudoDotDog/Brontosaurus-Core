@@ -24,6 +24,11 @@ export class BrontosaurusSign {
         this._secret = secret;
     }
 
+    public get object(): IEncryptableObject {
+
+        return this._object;
+    }
+
     public token(): string {
 
         const header: IBrontosaurusHeader = createHeader();
