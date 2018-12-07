@@ -24,7 +24,7 @@ export class BrontosaurusSign {
         this._secret = secret;
     }
 
-    public sign(): string {
+    public token(): string {
 
         const header: IBrontosaurusHeader = createHeader();
         const serialized: string = `${serializeObject(header)}.${serializeObject(this._object)}`;

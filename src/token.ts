@@ -4,6 +4,9 @@
  * @description Token
  */
 
+import { IEncryptableObject } from "./declare";
+import { BrontosaurusSign } from "./sign";
+
 export class BrontosaurusToken {
 
     public static withSecret(secret: string): BrontosaurusToken {
@@ -16,5 +19,15 @@ export class BrontosaurusToken {
     private constructor(secret: string) {
 
         this._secret = secret;
+    }
+
+    public sign(object: IEncryptableObject): BrontosaurusSign {
+
+        return BrontosaurusSign.create(object, this._secret);
+    }
+
+    public validate(token: string): boolean {
+
+        return true;
     }
 }
