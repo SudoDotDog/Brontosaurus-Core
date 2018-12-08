@@ -16,7 +16,7 @@ export const encryptObject = (object: IEncryptableObject, secret: string): strin
 
 export const encryptString = (target: string, secret: string): string => {
 
-    const hmac: Hmac = createHmac('sha256', secret);
+    const hmac: Hmac = createHmac('sha1', secret);
     hmac.update(target);
 
     return hmac.digest('hex');
