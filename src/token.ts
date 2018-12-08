@@ -4,7 +4,8 @@
  * @description Token
  */
 
-import { IEncryptableObject } from "./declare";
+import { encryptString, serializeObject } from "./crypto";
+import { IBrontosaurusHeader, IEncryptableObject } from "./declare";
 import { BrontosaurusSign } from "./sign";
 
 export class BrontosaurusToken {
@@ -28,6 +29,16 @@ export class BrontosaurusToken {
 
     public validate(token: string): boolean {
 
-        return true;
+        const splited: string[] = token.split('.');
+        if (splited.length !== 3) {
+
+            return false;
+        }
+        const [header, object, hash]: [IBrontosaurusHeader, IEncryptableObject, string] = splited as [IBrontosaurusHeader, IEncryptableObject, string];
+
+        const serialized: string = `${serializeObject(header)}.${serializeObject(object)}`;
+
+        const encrypted: string = encryptString(serialized, this._secret);
+        return encrypted === hash;
     }
 }

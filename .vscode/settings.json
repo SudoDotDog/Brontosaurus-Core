@@ -4,6 +4,7 @@
         "deserialize",
         "ifeq",
         "setx",
+        "splited",
         "tshook"
     ],
     "tslint.configFile": "typescript/tslint.json"
