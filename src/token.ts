@@ -4,9 +4,10 @@
  * @description Token
  */
 
-import { encryptString, serializeObject } from "./crypto";
+import { deserializeString, encryptString } from "./crypto";
 import { IBrontosaurusHeader, IEncryptableObject } from "./declare";
 import { BrontosaurusSign } from "./sign";
+import { decouple, isExpired } from "./util";
 
 export class BrontosaurusToken {
 
@@ -29,15 +30,20 @@ export class BrontosaurusToken {
 
     public validate(token: string): boolean {
 
-        const splited: string[] = token.split('.');
-        if (splited.length !== 3) {
+        const decoupled: [string, string, string] | null = decouple(token);
 
+        if (!decoupled) {
             return false;
         }
-        const [header, object, hash]: [IBrontosaurusHeader, IEncryptableObject, string] = splited as [IBrontosaurusHeader, IEncryptableObject, string];
 
-        const serialized: string = `${serializeObject(header)}.${serializeObject(object)}`;
+        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
 
+        const header: IBrontosaurusHeader = deserializeString(serializedHeader);
+        if (isExpired(header.issuedAt, 100)) {
+            return false;
+        }
+
+        const serialized: string = `${serializedHeader}.${serializedObject}`;
         const encrypted: string = encryptString(serialized, this._secret);
         return encrypted === hash;
     }

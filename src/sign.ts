@@ -6,7 +6,7 @@
 
 import { encryptString, serializeObject } from "./crypto";
 import { IBrontosaurusHeader, IEncryptableObject } from "./declare";
-import { createHeader } from "./header";
+import { createHeader } from "./util";
 
 export class BrontosaurusSign {
 

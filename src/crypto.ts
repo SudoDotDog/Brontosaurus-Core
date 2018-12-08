@@ -32,12 +32,12 @@ export const serializeObject = (object: IEncryptableObject): string => {
     return base64;
 };
 
-export const deserializeString = (base64: string): IEncryptableObject => {
+export const deserializeString = <T = IEncryptableObject>(base64: string): T => {
 
     const buffer: Buffer = Buffer.from(base64, 'base64');
     const content: string = buffer.toString('utf8');
 
-    const object: IEncryptableObject = JSON.parse(content);
+    const object: T = JSON.parse(content);
 
     return object;
 };
