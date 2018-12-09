@@ -26,12 +26,14 @@ describe('Given {BrontosaurusSign} class', (): void => {
 
     it('should be able to generate token', (): void => {
 
+        const currentTime: number = Date.now();
+
         const secret: string = chance.string();
         const mockObject: MockEncryptableObject = MockEncryptableObject.create();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(mockObject.object, secret);
-        const token: string = sign.token();
+        const token: string = sign.token(currentTime);
 
-        expect(token).to.be.equal(sign.token());
+        expect(token).to.be.equal(sign.token(currentTime));
     });
 });
