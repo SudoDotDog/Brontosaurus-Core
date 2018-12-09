@@ -11,7 +11,7 @@ else
 	mocha := node_modules/.bin/mocha
 endif
 
-marked: dev
+main: dev
 
 dev:
 	@echo "[INFO] Building for development"
