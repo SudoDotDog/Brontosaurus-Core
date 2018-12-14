@@ -1,6 +1,6 @@
 {
 	"name": "@brontosaurus/core",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": ":zap: Lighting",
 	"main": "dist/index.js",
 	"scripts": {
@@ -20,6 +20,7 @@
 	},
 	"homepage": "https://github.com/SudoDotDog/Brontosaurus-Core#readme",
 	"devDependencies": {
+		"@sudoo/tslint-config": "^1.0.0",
 		"@types/chai": "^4.1.7",
 		"@types/chance": "^1.0.1",
 		"@types/mocha": "^5.2.5",

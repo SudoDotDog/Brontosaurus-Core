@@ -5,6 +5,7 @@
         "ifeq",
         "setx",
         "splited",
+        "sudoo",
         "tshook"
     ],
     "tslint.configFile": "typescript/tslint.json"
