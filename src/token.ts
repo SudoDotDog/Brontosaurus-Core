@@ -28,7 +28,7 @@ export class BrontosaurusToken {
         return BrontosaurusSign.create(object, this._secret);
     }
 
-    public validate(token: string): boolean {
+    public clock(token: string, offset: number): boolean {
 
         const decoupled: [string, string, string] | null = decouple(token);
 
@@ -37,14 +37,36 @@ export class BrontosaurusToken {
         }
 
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
-
         const header: IBrontosaurusHeader = deserializeString(serializedHeader);
-        if (isExpired(header.issuedAt, 100)) {
+
+        if (!header.issuedAt) {
             return false;
         }
 
+        if (isExpired(header.issuedAt, offset)) {
+            return false;
+        }
+
+        return header.issuedAt <= Date.now();
+    }
+
+    public check(token: string): boolean {
+
+        const decoupled: [string, string, string] | null = decouple(token);
+
+        if (!decoupled) {
+            return false;
+        }
+
+        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
         const serialized: string = `${serializedHeader}.${serializedObject}`;
         const encrypted: string = encryptString(serialized, this._secret);
+
         return encrypted === hash;
+    }
+
+    public validate(token: string, offset: number): boolean {
+
+        return this.clock(token, offset) && this.check(token);
     }
 }
