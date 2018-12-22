@@ -3,6 +3,7 @@
         "Encryptable",
         "clazz",
         "deserialize",
+        "deserialized",
         "ifeq",
         "setx",
         "splited",
