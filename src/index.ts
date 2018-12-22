@@ -46,6 +46,7 @@ export class Brontosaurus {
     }
 }
 
+export { IBrontosaurusBody } from "./declare";
 export { BrontosaurusSign } from "./sign";
 export { BrontosaurusToken, IEncryptableObject };
 
