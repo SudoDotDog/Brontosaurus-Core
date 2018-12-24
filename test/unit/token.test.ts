@@ -31,7 +31,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const mockObject: MockEncryptableObject = MockEncryptableObject.create();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(mockObject.object, secret);
-        const token: string = sign.token(currentTime);
+        const token: string = sign.token(currentTime, currentTime);
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
@@ -47,7 +47,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const mockObject: MockEncryptableObject = MockEncryptableObject.create();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(mockObject.object, secret);
-        const token: string = sign.token(mockTime);
+        const token: string = sign.token(mockTime, Date.now());
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
@@ -58,6 +58,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
     it('should be invalid if time traveling', (): void => {
 
         const mockTime: number = Date.now() + 8000;
+        const currentTime: number = Date.now();
 
         const secret: string = chance.string();
         const mockObject: MockEncryptableObject = MockEncryptableObject.create();
@@ -74,12 +75,13 @@ describe('Given {BrontosaurusToken} class', (): void => {
     it('should be invalid if can not crypt', (): void => {
 
         const mockTime: number = Date.now();
+        const currentTime: number = Date.now();
 
         const secret: string = chance.string();
         const mockObject: MockEncryptableObject = MockEncryptableObject.create();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(mockObject.object, secret);
-        const token: string = sign.token(mockTime) + chance.string();
+        const token: string = sign.token(mockTime, currentTime) + chance.string();
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 

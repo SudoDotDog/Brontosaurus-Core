@@ -32,8 +32,8 @@ describe('Given {BrontosaurusSign} class', (): void => {
         const mockObject: MockEncryptableObject = MockEncryptableObject.create();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(mockObject.object, secret);
-        const token: string = sign.token(currentTime);
+        const token: string = sign.token(currentTime, currentTime);
 
-        expect(token).to.be.equal(sign.token(currentTime));
+        expect(token).to.be.equal(sign.token(currentTime, currentTime));
     });
 });

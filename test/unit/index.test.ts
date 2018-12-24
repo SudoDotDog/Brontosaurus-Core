@@ -41,7 +41,7 @@ describe('Given {Brontosaurus} class', (): void => {
         const currentTime: number = Date.now();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(object, secret);
-        const token: string = sign.token(currentTime);
+        const token: string = sign.token(currentTime, currentTime);
 
         const deserialized: {
             a: string;
@@ -61,7 +61,7 @@ describe('Given {Brontosaurus} class', (): void => {
         const currentTime: number = Date.now();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(object, secret);
-        const token: string = sign.token(currentTime);
+        const token: string = sign.token(currentTime, currentTime);
 
         const deserialized: IBrontosaurusHeader | null = Brontosaurus.decoupleHeader(token);
 
