@@ -4,6 +4,7 @@
  * @description Token
  */
 
+import { isNumber } from "util";
 import { deserializeString, encryptString } from "./crypto";
 import { IBrontosaurusHeader, IEncryptableObject } from "./declare";
 import { BrontosaurusSign } from "./sign";
@@ -39,11 +40,11 @@ export class BrontosaurusToken {
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
         const header: IBrontosaurusHeader = deserializeString(serializedHeader);
 
-        if (!header.issuedAt) {
+        if (!isNumber(header.issuedAt) || !isNumber(header.expireAt)) {
             return false;
         }
 
-        if (isExpired(header.issuedAt, offset)) {
+        if (isExpired(header.expireAt, offset)) {
             return false;
         }
 

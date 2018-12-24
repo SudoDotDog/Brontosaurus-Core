@@ -6,12 +6,13 @@
 
 import { IBrontosaurusHeader } from "./declare";
 
-export const createHeader = (time: number): IBrontosaurusHeader => ({
-    issuedAt: time,
+export const createHeader = (expireAt: number): IBrontosaurusHeader => ({
+    expireAt,
+    issuedAt: Date.now(),
 });
 
-export const isExpired = (time: number, offset: number): boolean =>
-    time + offset < Date.now();
+export const isExpired = (expireAt: number, offset: number): boolean =>
+    expireAt + offset < Date.now();
 
 export const decouple = (token: string): [string, string, string] | null => {
 

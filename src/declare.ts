@@ -20,5 +20,6 @@ export interface IBrontosaurusBody extends IEncryptableObject {
 
 export interface IBrontosaurusHeader extends IEncryptableObject {
 
+    expireAt: number;
     issuedAt: number;
 }
