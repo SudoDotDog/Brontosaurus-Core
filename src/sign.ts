@@ -29,9 +29,9 @@ export class BrontosaurusSign {
         return this._object;
     }
 
-    public token(expireAt: number = Date.now()): string {
+    public token(expireAt: number = Date.now(), issuedAt: number = Date.now()): string {
 
-        const header: IBrontosaurusHeader = createHeader(expireAt);
+        const header: IBrontosaurusHeader = createHeader(expireAt, issuedAt);
         const serialized: string = `${serializeObject(header)}.${serializeObject(this._object)}`;
 
         const encrypted: string = encryptString(serialized, this._secret);

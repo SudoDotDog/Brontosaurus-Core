@@ -6,9 +6,9 @@
 
 import { IBrontosaurusHeader } from "./declare";
 
-export const createHeader = (expireAt: number): IBrontosaurusHeader => ({
+export const createHeader = (expireAt: number, issuedAt: number): IBrontosaurusHeader => ({
     expireAt,
-    issuedAt: Date.now(),
+    issuedAt,
 });
 
 export const isExpired = (expireAt: number, offset: number): boolean =>

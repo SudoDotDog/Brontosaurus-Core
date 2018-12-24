@@ -67,6 +67,7 @@ describe('Given {Brontosaurus} class', (): void => {
 
         expect(deserialized).to.be.deep.equal({
             issuedAt: currentTime,
+            expireAt: currentTime,
         });
     });
 });
