@@ -17,14 +17,23 @@ export class BrontosaurusToken {
         return new BrontosaurusToken(secret);
     }
 
-    private readonly _secret: string;
+    public static withoutSecret(): BrontosaurusToken {
 
-    private constructor(secret: string) {
+        return new BrontosaurusToken(null);
+    }
+
+    private readonly _secret: string | null;
+
+    private constructor(secret: string | null) {
 
         this._secret = secret;
     }
 
     public sign(object: IEncryptableObject): BrontosaurusSign {
+
+        if (!this._secret) {
+            throw new Error('[Brontosaurus-Core] Need Secret');
+        }
 
         return BrontosaurusSign.create(object, this._secret);
     }
@@ -52,6 +61,10 @@ export class BrontosaurusToken {
     }
 
     public check(token: string): boolean {
+
+        if (!this._secret) {
+            throw new Error('[Brontosaurus-Core] Need Secret');
+        }
 
         const decoupled: [string, string, string] | null = decouple(token);
 
