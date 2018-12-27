@@ -66,6 +66,25 @@ export class BrontosaurusToken {
         return encrypted === hash;
     }
 
+    public key(token: string): string | null {
+
+        const decoupled: [string, string, string] | null = decouple(token);
+
+        if (!decoupled) {
+            return null;
+        }
+
+        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
+        const header: IBrontosaurusHeader = deserializeString(serializedHeader);
+
+        if (header.key) {
+
+            return header.key;
+        }
+
+        return null;
+    }
+
     public validate(token: string, offset: number): boolean {
 
         return this.clock(token, offset) && this.check(token);

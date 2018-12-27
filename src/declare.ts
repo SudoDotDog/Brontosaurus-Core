@@ -22,4 +22,5 @@ export interface IBrontosaurusHeader extends IEncryptableObject {
 
     expireAt: number;
     issuedAt: number;
+    key?: string;
 }
