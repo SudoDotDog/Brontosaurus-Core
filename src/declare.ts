@@ -8,7 +8,7 @@ export type Basics = string | number | boolean;
 
 export interface IEncryptableObject {
 
-    [key: string]: Basics | Basics[];
+    [key: string]: Basics | null | undefined | Basics[];
 }
 
 export interface IBrontosaurusBody extends IEncryptableObject {
