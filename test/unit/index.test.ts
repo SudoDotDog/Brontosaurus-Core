@@ -5,11 +5,11 @@
  * @package Unit Test
  */
 
+import { IBrontosaurusHeader } from '@brontosaurus/definition';
 import { expect } from 'chai';
 import * as Chance from 'chance';
 import { Brontosaurus, BrontosaurusSign } from '../../src';
 import { serializeObject } from '../../src/crypto';
-import { IBrontosaurusHeader } from '../../src/declare';
 
 describe('Given {Brontosaurus} class', (): void => {
 

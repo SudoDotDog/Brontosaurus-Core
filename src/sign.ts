@@ -4,23 +4,23 @@
  * @description Sign
  */
 
+import { EncryptableObject, IBrontosaurusHeader } from "@brontosaurus/definition";
 import { encryptString, serializeObject } from "./crypto";
-import { IBrontosaurusHeader, IEncryptableObject } from "./declare";
 import { createHeader } from "./util";
 
 export class BrontosaurusSign {
 
-    public static create(object: IEncryptableObject, secret: string): BrontosaurusSign {
+    public static create(object: EncryptableObject, secret: string): BrontosaurusSign {
 
         return new BrontosaurusSign(object, secret);
     }
 
-    private readonly _object: IEncryptableObject;
+    private readonly _object: EncryptableObject;
     private readonly _secret: string;
 
     private _key: string | null;
 
-    private constructor(object: IEncryptableObject, secret: string) {
+    private constructor(object: EncryptableObject, secret: string) {
 
         this._object = object;
         this._secret = secret;
@@ -28,7 +28,7 @@ export class BrontosaurusSign {
         this._key = null;
     }
 
-    public get object(): IEncryptableObject {
+    public get object(): EncryptableObject {
 
         return this._object;
     }

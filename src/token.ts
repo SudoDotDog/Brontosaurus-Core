@@ -4,9 +4,9 @@
  * @description Token
  */
 
+import { EncryptableObject, IBrontosaurusHeader } from "@brontosaurus/definition";
 import { isNumber } from "util";
 import { deserializeString, encryptString } from "./crypto";
-import { IBrontosaurusHeader, IEncryptableObject } from "./declare";
 import { BrontosaurusSign } from "./sign";
 import { decouple, isExpired } from "./util";
 
@@ -29,7 +29,7 @@ export class BrontosaurusToken {
         this._secret = secret;
     }
 
-    public sign(object: IEncryptableObject): BrontosaurusSign {
+    public sign(object: EncryptableObject): BrontosaurusSign {
 
         if (!this._secret) {
             throw new Error('[Brontosaurus-Core] Need Secret');

@@ -5,10 +5,10 @@
  * @package Unit Test
  */
 
+import { EncryptableObject } from '@brontosaurus/definition';
 import { expect } from 'chai';
 import * as Chance from 'chance';
 import { deserializeString, encryptObject, serializeObject } from '../../src/crypto';
-import { IEncryptableObject } from '../../src/declare';
 
 describe('Given [Crypto] help functions', (): void => {
 
@@ -21,7 +21,7 @@ describe('Given [Crypto] help functions', (): void => {
             const key: string = chance.string();
             const value: string = chance.string();
 
-            const object: IEncryptableObject = {
+            const object: EncryptableObject = {
                 [key]: value,
             };
 
@@ -37,7 +37,7 @@ describe('Given [Crypto] help functions', (): void => {
             const key: string = chance.string();
             const value: string = chance.string();
 
-            const object: IEncryptableObject = {
+            const object: EncryptableObject = {
                 [key]: value,
             };
 
@@ -54,7 +54,7 @@ describe('Given [Crypto] help functions', (): void => {
             const key: string = chance.string();
             const value: string = chance.string();
 
-            const object: IEncryptableObject = {
+            const object: EncryptableObject = {
                 [key]: value,
             };
 
@@ -68,7 +68,7 @@ describe('Given [Crypto] help functions', (): void => {
             const key: string = chance.string();
             const value: string = chance.string();
 
-            const object: IEncryptableObject = {
+            const object: EncryptableObject = {
                 [key]: value,
             };
 

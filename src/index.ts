@@ -4,8 +4,8 @@
  * @description Index
  */
 
+import { EncryptableObject, IBrontosaurusHeader } from "@brontosaurus/definition";
 import { deserializeString } from "./crypto";
-import { IBrontosaurusHeader, IEncryptableObject } from "./declare";
 import { BrontosaurusToken } from "./token";
 import { decouple } from "./util";
 
@@ -16,12 +16,12 @@ export class Brontosaurus {
         return BrontosaurusToken.withSecret(secret);
     }
 
-    public static deserialize<T = IEncryptableObject>(base64: string): T {
+    public static deserialize<T = EncryptableObject>(base64: string): T {
 
         return deserializeString(base64);
     }
 
-    public static decoupleBody<T = IEncryptableObject>(token: string): T | null {
+    public static decoupleBody<T = EncryptableObject>(token: string): T | null {
 
         const decoupled: [string, string, string] | null = decouple(token);
 
@@ -46,7 +46,6 @@ export class Brontosaurus {
     }
 }
 
-export { IBrontosaurusBody } from "./declare";
 export { BrontosaurusSign } from "./sign";
-export { BrontosaurusToken, IEncryptableObject };
+export { BrontosaurusToken };
 

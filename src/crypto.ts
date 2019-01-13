@@ -4,10 +4,10 @@
  * @description Crypto
  */
 
+import { EncryptableObject } from "@brontosaurus/definition";
 import { createHmac, Hmac } from 'crypto';
-import { IEncryptableObject } from "./declare";
 
-export const encryptObject = (object: IEncryptableObject, secret: string): string => {
+export const encryptObject = (object: EncryptableObject, secret: string): string => {
 
     const json: string = JSON.stringify(object);
 
@@ -22,7 +22,7 @@ export const encryptString = (target: string, secret: string): string => {
     return hmac.digest('hex');
 };
 
-export const serializeObject = (object: IEncryptableObject): string => {
+export const serializeObject = (object: EncryptableObject): string => {
 
     const json: string = JSON.stringify(object);
 
@@ -32,7 +32,7 @@ export const serializeObject = (object: IEncryptableObject): string => {
     return base64;
 };
 
-export const deserializeString = <T = IEncryptableObject>(base64: string): T => {
+export const deserializeString = <T = EncryptableObject>(base64: string): T => {
 
     const buffer: Buffer = Buffer.from(base64, 'base64');
     const content: string = buffer.toString('utf8');

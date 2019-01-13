@@ -4,8 +4,8 @@
  * @description EncryptableObject
  */
 
+import { EncryptableObject } from '@brontosaurus/definition';
 import * as Chance from 'chance';
-import { IEncryptableObject } from '../../src/declare';
 
 export class MockEncryptableObject {
 
@@ -25,7 +25,7 @@ export class MockEncryptableObject {
         this._value = value || chance.string();
     }
 
-    public get object(): IEncryptableObject {
+    public get object(): EncryptableObject {
 
         return {
             [this._key]: this._value,

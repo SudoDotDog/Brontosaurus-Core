@@ -1,6 +1,6 @@
 {
 	"name": "@brontosaurus/core",
-	"version": "1.3.2",
+	"version": "1.4.1",
 	"description": ":zap: Lighting",
 	"main": "dist/index.js",
 	"scripts": {
@@ -19,6 +19,9 @@
 		"url": "https://github.com/SudoDotDog/Brontosaurus-Core/issues"
 	},
 	"homepage": "https://github.com/SudoDotDog/Brontosaurus-Core#readme",
+	"dependencies": {
+		"@brontosaurus/definition": "^1.0.0"
+	},
 	"devDependencies": {
 		"@sudoo/triforce": "^1.1.0",
 		"@types/node": "^10.12.18"
@@ -41,6 +44,5 @@
 			"./test/tshook.js"
 		],
 		"sourceMap": true
-	},
-	"dependencies": {}
+	}
 }

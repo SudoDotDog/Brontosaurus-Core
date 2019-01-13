@@ -4,7 +4,7 @@
  * @description Util
  */
 
-import { IBrontosaurusHeader } from "./declare";
+import { IBrontosaurusHeader } from "@brontosaurus/definition";
 
 export const createHeader = (expireAt: number, issuedAt: number, key?: string | null): IBrontosaurusHeader => {
 
