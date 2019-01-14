@@ -20,7 +20,7 @@
 	},
 	"homepage": "https://github.com/SudoDotDog/Brontosaurus-Core#readme",
 	"dependencies": {
-		"@brontosaurus/definition": "^1.0.0"
+		"@brontosaurus/definition": "^1.1.0"
 	},
 	"devDependencies": {
 		"@sudoo/triforce": "^1.1.0",

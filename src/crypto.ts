@@ -22,22 +22,18 @@ export const encryptString = (target: string, secret: string): string => {
     return hmac.digest('hex');
 };
 
-export const serializeObject = (object: EncryptableObject): string => {
+export const serializeString = (before: string): string => {
 
-    const json: string = JSON.stringify(object);
-
-    const buffer: Buffer = Buffer.from(json);
+    const buffer: Buffer = Buffer.from(before);
     const base64: string = buffer.toString('base64');
 
     return base64;
 };
 
-export const deserializeString = <T = EncryptableObject>(base64: string): T => {
+export const deserializeString = (before: string): string => {
 
-    const buffer: Buffer = Buffer.from(base64, 'base64');
+    const buffer: Buffer = Buffer.from(before, 'base64');
     const content: string = buffer.toString('utf8');
 
-    const object: T = JSON.parse(content);
-
-    return object;
+    return content;
 };

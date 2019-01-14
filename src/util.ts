@@ -4,25 +4,10 @@
  * @description Util
  */
 
-import { IBrontosaurusHeader } from "@brontosaurus/definition";
+import { BrontosaurusDefinition } from "@brontosaurus/definition";
+import { deserializeString, serializeString } from "./crypto";
 
-export const createHeader = (expireAt: number, issuedAt: number, key?: string | null): IBrontosaurusHeader => {
-
-    const header: IBrontosaurusHeader = {
-        expireAt,
-        issuedAt,
-    };
-
-    if (key) {
-
-        return {
-            ...header,
-            key,
-        };
-    }
-
-    return header;
-};
+export const definition = BrontosaurusDefinition.withEncoder(serializeString, deserializeString);
 
 export const isExpired = (expireAt: number, offset: number): boolean =>
     expireAt + offset < Date.now();
