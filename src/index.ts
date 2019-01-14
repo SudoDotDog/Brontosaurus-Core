@@ -4,8 +4,8 @@
  * @description Index
  */
 
-import { EncryptableObject, IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
-import { deserializeString } from "./crypto";
+import { BrontosaurusDefinition, EncryptableObject, IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
+import { deserializeString, serializeString } from "./crypto";
 import { BrontosaurusToken } from "./token";
 import { decouple } from "./util";
 
@@ -45,6 +45,8 @@ export class Brontosaurus {
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
         return this.deserialize(serializedHeader);
     }
+
+    private static _definition: BrontosaurusDefinition = BrontosaurusDefinition.withEncoder(serializeString, deserializeString);
 }
 
 export { BrontosaurusSign } from "./sign";

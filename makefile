@@ -41,6 +41,6 @@ clean-linux:
 	@rm -rf .nyc_output
 	@rm -rf coverage
 
-publish: install tests build
+publish: install tests clean-linux build
 	@echo "[INFO] Publishing package"
 	@npm publish --access=public
