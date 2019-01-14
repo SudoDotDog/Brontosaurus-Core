@@ -12,9 +12,9 @@ import { decouple, isExpired } from "./util";
 
 export class BrontosaurusToken {
 
-    public static withSecret(key: string, secret: string): BrontosaurusToken {
+    public static withSecret(secret: string): BrontosaurusToken {
 
-        return new BrontosaurusToken(key, secret);
+        return new BrontosaurusToken(secret);
     }
 
     public static key(token: string): string | null {
@@ -39,22 +39,16 @@ export class BrontosaurusToken {
         return null;
     }
 
-    private readonly _secret: string | null;
-    private readonly _key: string;
+    private readonly _secret: string;
 
-    private constructor(key: string, secret?: string) {
+    private constructor(secret: string) {
 
-        this._key = key;
-        this._secret = secret || null;
+        this._secret = secret;
     }
 
-    public sign(body: IBrontosaurusBody): BrontosaurusSign {
+    public sign(key: string, body: IBrontosaurusBody): BrontosaurusSign {
 
-        if (!this._secret) {
-            throw new Error('[Brontosaurus-Core] Need Secret');
-        }
-
-        return BrontosaurusSign.create(this._key, body, this._secret);
+        return BrontosaurusSign.create(key, body, this._secret);
     }
 
     public key(token: string): string | null {
@@ -85,10 +79,6 @@ export class BrontosaurusToken {
     }
 
     public check(token: string): boolean {
-
-        if (!this._secret) {
-            throw new Error('[Brontosaurus-Core] Need Secret');
-        }
 
         const decoupled: [string, string, string] | null = decouple(token);
 

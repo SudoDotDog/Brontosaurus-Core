@@ -5,6 +5,7 @@
  * @package Unit Test
  */
 
+import { IBrontosaurusBody } from '@brontosaurus/definition';
 import { expect } from 'chai';
 import * as Chance from 'chance';
 import { BrontosaurusSign } from '../../src/sign';
@@ -19,7 +20,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
         const key: string = chance.string();
         const secret: string = chance.string();
-        const token: BrontosaurusToken = BrontosaurusToken.withSecret(key, secret);
+        const token: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
         expect(token).to.be.instanceOf(BrontosaurusToken);
     });
@@ -39,6 +40,23 @@ describe('Given {BrontosaurusToken} class', (): void => {
         expect(result).to.be.equal(key);
     });
 
+    it('should be able to sign token', (): void => {
+
+        const currentTime: number = Date.now();
+
+        const key: string = chance.string();
+        const body: IBrontosaurusBody = createMockBody();
+        const secret: string = chance.string();
+
+        const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
+        const sign: BrontosaurusSign = clazz.sign(key, body);
+        const token: string = sign.token(currentTime, currentTime);
+
+        const result: string | null = BrontosaurusToken.key(token);
+
+        expect(result).to.be.equal(key);
+    });
+
     it('should be valid if valid', (): void => {
 
         const currentTime: number = Date.now();
@@ -49,7 +67,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
         const token: string = sign.token(currentTime, currentTime);
 
-        const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(key, secret);
+        const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
         // tslint:disable-next-line
         expect(clazz.validate(token, 5000)).to.be.true;
@@ -65,7 +83,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
         const token: string = sign.token(mockTime, Date.now());
 
-        const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(key, secret);
+        const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
         // tslint:disable-next-line
         expect(clazz.validate(token, 5000)).to.be.false;
@@ -81,7 +99,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
         const token: string = sign.token(mockTime, mockTime);
 
-        const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(key, secret);
+        const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
         // tslint:disable-next-line
         expect(clazz.validate(token, 5000)).to.be.false;
@@ -98,7 +116,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
         const token: string = sign.token(mockTime, currentTime) + chance.string();
 
-        const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(key, secret);
+        const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
         // tslint:disable-next-line
         expect(clazz.validate(token, 5000)).to.be.false;

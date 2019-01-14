@@ -1,6 +1,6 @@
 {
 	"name": "@brontosaurus/core",
-	"version": "1.5.1",
+	"version": "1.5.2",
 	"description": ":zap: Lighting",
 	"main": "dist/index.js",
 	"scripts": {
