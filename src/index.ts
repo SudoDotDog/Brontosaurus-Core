@@ -11,9 +11,9 @@ import { decouple } from "./util";
 
 export class Brontosaurus {
 
-    public static token(key: string, secret: string): BrontosaurusToken {
+    public static token(secret: string): BrontosaurusToken {
 
-        return BrontosaurusToken.withSecret(key, secret);
+        return BrontosaurusToken.withSecret(secret);
     }
 
     public static deserialize<T = EncryptableObject>(base64: string): T {
