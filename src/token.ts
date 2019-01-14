@@ -17,9 +17,26 @@ export class BrontosaurusToken {
         return new BrontosaurusToken(key, secret);
     }
 
-    public static withoutSecret(key: string): BrontosaurusToken {
+    public static key(token: string): string | null {
 
-        return new BrontosaurusToken(key);
+        const decoupled: [string, string, string] | null = decouple(token);
+
+        if (!decoupled) {
+            return null;
+        }
+
+        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
+        const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
+
+        if (!isString(header.key)) {
+            return null;
+        }
+
+        if (header.key) {
+            return header.key;
+        }
+
+        return null;
     }
 
     private readonly _secret: string | null;
@@ -38,6 +55,11 @@ export class BrontosaurusToken {
         }
 
         return BrontosaurusSign.create(this._key, body, this._secret);
+    }
+
+    public key(token: string): string | null {
+
+        return BrontosaurusToken.key(token);
     }
 
     public clock(token: string, offset: number): boolean {
@@ -79,28 +101,6 @@ export class BrontosaurusToken {
         const encrypted: string = encryptString(serialized, this._secret);
 
         return encrypted === hash;
-    }
-
-    public key(token: string): string | null {
-
-        const decoupled: [string, string, string] | null = decouple(token);
-
-        if (!decoupled) {
-            return null;
-        }
-
-        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
-        const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
-
-        if (!isString(header.key)) {
-            return null;
-        }
-
-        if (header.key) {
-            return header.key;
-        }
-
-        return null;
     }
 
     public validate(token: string, offset: number): boolean {
