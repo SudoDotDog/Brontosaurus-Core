@@ -5,10 +5,12 @@
  * @package Unit Test
  */
 
+import { IBrontosaurusBody } from '@brontosaurus/definition';
 import { expect } from 'chai';
 import * as Chance from 'chance';
 import { BrontosaurusSign } from '../../src/sign';
 import { MockEncryptableObject } from '../mock/encryptable-object';
+import { createMockBody } from '../mock/token';
 
 describe('Given {BrontosaurusSign} class', (): void => {
 
@@ -18,10 +20,11 @@ describe('Given {BrontosaurusSign} class', (): void => {
 
         const secret: string = chance.string();
         const mockObject: MockEncryptableObject = MockEncryptableObject.create();
+        const body: IBrontosaurusBody = createMockBody();
 
-        const sign: BrontosaurusSign = BrontosaurusSign.create(mockObject.object, secret);
+        const sign: BrontosaurusSign = BrontosaurusSign.create(chance.string(), body, secret);
 
-        expect(sign.object).to.be.deep.equal(mockObject.object);
+        expect(sign.body).to.be.deep.equal(body);
     });
 
     it('should be able to generate token', (): void => {
@@ -31,7 +34,7 @@ describe('Given {BrontosaurusSign} class', (): void => {
         const secret: string = chance.string();
         const mockObject: MockEncryptableObject = MockEncryptableObject.create();
 
-        const sign: BrontosaurusSign = BrontosaurusSign.create(mockObject.object, secret);
+        const sign: BrontosaurusSign = BrontosaurusSign.create(chance.string(), createMockBody(), secret);
         const token: string = sign.token(currentTime, currentTime);
 
         expect(token).to.be.equal(sign.token(currentTime, currentTime));

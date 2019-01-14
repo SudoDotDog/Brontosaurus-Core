@@ -4,38 +4,40 @@
  * @description Token
  */
 
-import { EncryptableObject, IBrontosaurusHeader } from "@brontosaurus/definition";
-import { isNumber } from "util";
+import { IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
+import { isNumber, isString } from "util";
 import { deserializeString, encryptString } from "./crypto";
 import { BrontosaurusSign } from "./sign";
 import { decouple, isExpired } from "./util";
 
 export class BrontosaurusToken {
 
-    public static withSecret(secret: string): BrontosaurusToken {
+    public static withSecret(key: string, secret: string): BrontosaurusToken {
 
-        return new BrontosaurusToken(secret);
+        return new BrontosaurusToken(key, secret);
     }
 
-    public static withoutSecret(): BrontosaurusToken {
+    public static withoutSecret(key: string): BrontosaurusToken {
 
-        return new BrontosaurusToken(null);
+        return new BrontosaurusToken(key);
     }
 
     private readonly _secret: string | null;
+    private readonly _key: string;
 
-    private constructor(secret: string | null) {
+    private constructor(key: string, secret?: string) {
 
-        this._secret = secret;
+        this._key = key;
+        this._secret = secret || null;
     }
 
-    public sign(object: EncryptableObject): BrontosaurusSign {
+    public sign(body: IBrontosaurusBody): BrontosaurusSign {
 
         if (!this._secret) {
             throw new Error('[Brontosaurus-Core] Need Secret');
         }
 
-        return BrontosaurusSign.create(object, this._secret);
+        return BrontosaurusSign.create(this._key, body, this._secret);
     }
 
     public clock(token: string, offset: number): boolean {
@@ -47,9 +49,9 @@ export class BrontosaurusToken {
         }
 
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
-        const header: IBrontosaurusHeader = deserializeString(serializedHeader);
+        const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
 
-        if (!isNumber(header.issuedAt) || !isNumber(header.expireAt)) {
+        if (!isNumber(header.issuedAt) || !isNumber(header.expireAt) || !isString(header.key)) {
             return false;
         }
 
@@ -88,10 +90,13 @@ export class BrontosaurusToken {
         }
 
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
-        const header: IBrontosaurusHeader = deserializeString(serializedHeader);
+        const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
+
+        if (!isString(header.key)) {
+            return null;
+        }
 
         if (header.key) {
-
             return header.key;
         }
 

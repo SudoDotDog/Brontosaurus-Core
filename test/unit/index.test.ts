@@ -5,11 +5,12 @@
  * @package Unit Test
  */
 
-import { IBrontosaurusHeader } from '@brontosaurus/definition';
+import { IBrontosaurusBody, IBrontosaurusHeader } from '@brontosaurus/definition';
 import { expect } from 'chai';
 import * as Chance from 'chance';
 import { Brontosaurus, BrontosaurusSign } from '../../src';
-import { serializeObject } from '../../src/crypto';
+import { serializeString } from '../../src/crypto';
+import { createMockBody } from '../mock/token';
 
 describe('Given {Brontosaurus} class', (): void => {
 
@@ -22,7 +23,7 @@ describe('Given {Brontosaurus} class', (): void => {
         } = {
             a: chance.string(),
         };
-        const serialized: string = serializeObject(object);
+        const serialized: string = serializeString(JSON.stringify(object));
         const deserialized: {
             a: string;
         } = Brontosaurus.deserialize(serialized);
@@ -32,35 +33,25 @@ describe('Given {Brontosaurus} class', (): void => {
 
     it('should be able to decouple body', (): void => {
 
-        const object: {
-            a: string;
-        } = {
-            a: chance.string(),
-        };
+        const body: IBrontosaurusBody = createMockBody();
         const secret: string = chance.string();
         const currentTime: number = Date.now();
 
-        const sign: BrontosaurusSign = BrontosaurusSign.create(object, secret);
+        const sign: BrontosaurusSign = BrontosaurusSign.create(chance.string(), body, secret);
         const token: string = sign.token(currentTime, currentTime);
 
-        const deserialized: {
-            a: string;
-        } | null = Brontosaurus.decoupleBody(token);
+        const deserialized: IBrontosaurusBody | null = Brontosaurus.decoupleBody(token);
 
-        expect(deserialized).to.be.deep.equal(object);
+        expect(deserialized).to.be.deep.equal(body);
     });
 
     it('should be able to decouple header', (): void => {
 
-        const object: {
-            a: string;
-        } = {
-            a: chance.string(),
-        };
+        const key: string = chance.string();
         const secret: string = chance.string();
         const currentTime: number = Date.now();
 
-        const sign: BrontosaurusSign = BrontosaurusSign.create(object, secret);
+        const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
         const token: string = sign.token(currentTime, currentTime);
 
         const deserialized: IBrontosaurusHeader | null = Brontosaurus.decoupleHeader(token);
@@ -68,6 +59,7 @@ describe('Given {Brontosaurus} class', (): void => {
         expect(deserialized).to.be.deep.equal({
             issuedAt: currentTime,
             expireAt: currentTime,
+            key,
         });
     });
 });

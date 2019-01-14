@@ -8,7 +8,7 @@
 import { EncryptableObject } from '@brontosaurus/definition';
 import { expect } from 'chai';
 import * as Chance from 'chance';
-import { deserializeString, encryptObject, serializeObject } from '../../src/crypto';
+import { deserializeString, encryptObject, serializeString } from '../../src/crypto';
 
 describe('Given [Crypto] help functions', (): void => {
 
@@ -58,9 +58,9 @@ describe('Given [Crypto] help functions', (): void => {
                 [key]: value,
             };
 
-            const serialized: string = serializeObject(object);
+            const serialized: string = serializeString(JSON.stringify(object));
 
-            expect(serialized).to.be.equal(serializeObject(object));
+            expect(serialized).to.be.equal(serializeString(JSON.stringify(object)));
         });
 
         it('should be able to deserialize object', (): void => {
@@ -72,9 +72,9 @@ describe('Given [Crypto] help functions', (): void => {
                 [key]: value,
             };
 
-            const serialized: string = serializeObject(object);
+            const serialized: string = serializeString(JSON.stringify(object));
 
-            expect(object).to.be.deep.equal(deserializeString(serialized));
+            expect(JSON.stringify(object)).to.be.deep.equal(deserializeString(serialized));
         });
     });
 

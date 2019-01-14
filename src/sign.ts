@@ -4,7 +4,7 @@
  * @description Sign
  */
 
-import { EncryptableObject, IBrontosaurusHeader, IBrontosaurusBody } from "@brontosaurus/definition";
+import { BrontosaurusDefinition, IBrontosaurusBody } from "@brontosaurus/definition";
 import { encryptString } from "./crypto";
 import { definition } from "./util";
 
@@ -36,10 +36,7 @@ export class BrontosaurusSign {
         const header: string = definition.header(expireAt, issuedAt, this._key);
         const body: string = definition.body(this._body.username, this._body.groups, this.body.infos);
 
-        const serialized: string = `${header}.${body}`;
-
-        const encrypted: string = encryptString(serialized, this._secret);
-
-        return `${serialized}.${encrypted}`;
+        const encrypted: string = BrontosaurusDefinition.signWith(header, body, (content: string) => encryptString(content, this._secret));
+        return encrypted;
     }
 }

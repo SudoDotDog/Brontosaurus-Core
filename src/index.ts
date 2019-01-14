@@ -4,24 +4,25 @@
  * @description Index
  */
 
-import { EncryptableObject, IBrontosaurusHeader } from "@brontosaurus/definition";
+import { EncryptableObject, IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
 import { deserializeString } from "./crypto";
 import { BrontosaurusToken } from "./token";
 import { decouple } from "./util";
 
 export class Brontosaurus {
 
-    public static token(secret: string): BrontosaurusToken {
+    public static token(key: string, secret: string): BrontosaurusToken {
 
-        return BrontosaurusToken.withSecret(secret);
+        return BrontosaurusToken.withSecret(key, secret);
     }
 
     public static deserialize<T = EncryptableObject>(base64: string): T {
 
-        return deserializeString(base64);
+        const deserialized: string = deserializeString(base64);
+        return JSON.parse(deserialized);
     }
 
-    public static decoupleBody<T = EncryptableObject>(token: string): T | null {
+    public static decoupleBody(token: string): IBrontosaurusBody | null {
 
         const decoupled: [string, string, string] | null = decouple(token);
 
