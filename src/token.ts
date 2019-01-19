@@ -26,17 +26,24 @@ export class BrontosaurusToken {
         }
 
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
-        const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
 
-        if (!isString(header.key)) {
+        try {
+
+            const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
+
+            if (!isString(header.key)) {
+                return null;
+            }
+
+            if (header.key) {
+                return header.key;
+            }
+
+            return null;
+        } catch (err) {
+
             return null;
         }
-
-        if (header.key) {
-            return header.key;
-        }
-
-        return null;
     }
 
     private readonly _secret: string;
@@ -65,17 +72,45 @@ export class BrontosaurusToken {
         }
 
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
-        const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
 
-        if (!isNumber(header.issuedAt) || !isNumber(header.expireAt) || !isString(header.key)) {
+        try {
+
+            const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
+
+            if (!isNumber(header.issuedAt) || !isNumber(header.expireAt) || !isString(header.key)) {
+                return false;
+            }
+
+            if (isExpired(header.expireAt, offset)) {
+                return false;
+            }
+
+            return header.issuedAt <= Date.now();
+        } catch (err) {
+
             return false;
         }
+    }
 
-        if (isExpired(header.expireAt, offset)) {
-            return false;
+    public body(token: string): IBrontosaurusBody | null {
+
+        const decoupled: [string, string, string] | null = decouple(token);
+
+        if (!decoupled) {
+            return null;
         }
 
-        return header.issuedAt <= Date.now();
+        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
+
+        try {
+
+            const body: IBrontosaurusBody = JSON.parse(deserializeString(serializedObject));
+
+            return body;
+        } catch (err) {
+
+            return null;
+        }
     }
 
     public check(token: string): boolean {
