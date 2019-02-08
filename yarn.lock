@@ -5,12 +5,10 @@
 "@brontosaurus/definition@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.2.0.tgz#5952e6fc48b289d9e71e456ad3a39a3d46b2e6e6"
-  integrity sha512-OlIrLch8z18Tzh15ZY7Fv9SGQQC9yA8BFBlz9i1yaSnOpDweeK8UcEirbyWqEe40yokqKpLWp1Dc4gaF9K+FeA==
 
-"@sudoo/triforce@^1.1.0":
+"@sudoo/triforce@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@sudoo/triforce/-/triforce-1.2.0.tgz#b889cdea63de75c1837d7665bdeecf782cd215fa"
-  integrity sha512-skVq+N2pZIp9qwBQRBiX64nvNYJ78/mi8ABZ/y5sae6zhcrlCewCR8y4qOw9+f9dSUJ0DquzSMtO71f38KaBWQ==
   dependencies:
     "@sudoo/tslint-config" "^1.2.0"
     "@types/chai" "^4.1.7"
@@ -26,7 +24,6 @@
 "@sudoo/tslint-config@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@sudoo/tslint-config/-/tslint-config-1.2.0.tgz#00f02d8b1ec73eedfc9ad89a19293c858f5f6ea2"
-  integrity sha512-0kCb5BO9YcG+eE9MLLFz2GAlDdFY9v3xEYQbyouMAC8FedPky+tYB8/2jfvpnKdidF/lQXK7tfrN34EBX1fX8A==
 
 "@types/chai@^4.1.7":
   version "4.1.7"
@@ -40,10 +37,9 @@
   version "5.2.5"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-5.2.5.tgz#8a4accfc403c124a0bafe8a9fc61a05ec1032073"
 
-"@types/node@^10.12.18":
-  version "10.12.21"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.21.tgz#7e8a0c34cf29f4e17a36e9bd0ea72d45ba03908e"
-  integrity sha512-CBgLNk4o3XMnqMc0rhb6lc77IwShMEglz05deDcn2lQxyXEZivfwgYJu7SMha9V5XcrP6qZuevTHV/QrN2vjKQ==
+"@types/node@^10.12.23":
+  version "10.12.23"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.23.tgz#308a3acdc5d1c842aeadc50b867d99c46cfae868"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -390,7 +386,6 @@ tslib@^1.8.0, tslib@^1.8.1:
 tslint@^5.12.1:
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.12.1.tgz#8cec9d454cf8a1de9b0a26d7bdbad6de362e52c1"
-  integrity sha512-sfodBHOucFg6egff8d1BvuofoOQ/nOeYNfbp7LDlKBcLNrL3lmS5zoiDGyOMdT7YsEXAwWpTdAHwOGOc8eRZAw==
   dependencies:
     babel-code-frame "^6.22.0"
     builtin-modules "^1.1.1"
@@ -418,7 +413,6 @@ type-detect@^4.0.0, type-detect@^4.0.5:
 typescript@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.4.tgz#c585cb952912263d915b462726ce244ba510ef3d"
-  integrity sha512-0RNDbSdEokBeEAkgNbxJ+BLwSManFy9TeXz8uW+48j/xhEXv1ePME60olyzw2XzUqUBNAYFeJadIqAgNqIACwg==
 
 wrappy@1:
   version "1.0.2"
