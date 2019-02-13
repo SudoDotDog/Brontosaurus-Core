@@ -33,8 +33,12 @@ export class BrontosaurusSign {
 
     public token(expireAt: number = Date.now(), issuedAt: number = Date.now()): string {
 
-        const header: string = definition.header(expireAt, issuedAt, this._key);
-        const body: string = definition.body(this._body.username, this._body.groups, this.body.infos);
+        const header: string = definition.header({
+            expireAt,
+            issuedAt,
+            key: this._key,
+        });
+        const body: string = definition.body(this.body);
 
         const encrypted: string = BrontosaurusDefinition.signWith(header, body, (content: string) => encryptString(content, this._secret));
         return encrypted;
