@@ -3,6 +3,7 @@
         "Encryptable",
         "WMXPY",
         "clazz",
+        "codecov",
         "deserialize",
         "deserialized",
         "ifeq",
