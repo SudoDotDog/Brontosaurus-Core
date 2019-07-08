@@ -10,7 +10,7 @@ import { deserializeString, serializeString } from "./crypto";
 export const definition = BrontosaurusDefinition.withEncoder(serializeString, deserializeString);
 
 export const isExpired = (expireAt: number, offset: number): boolean =>
-    expireAt + offset < Date.now();
+    (expireAt + offset) < Date.now();
 
 export const decouple = (token: string): [string, string, string] | null => {
 

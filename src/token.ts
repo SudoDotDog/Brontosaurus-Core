@@ -63,7 +63,7 @@ export class BrontosaurusToken {
         return BrontosaurusToken.key(token);
     }
 
-    public clock(token: string, offset: number): boolean {
+    public clock(token: string, offset: number, allowDelay: number = 0): boolean {
 
         const decoupled: [string, string, string] | null = decouple(token);
 
@@ -85,7 +85,7 @@ export class BrontosaurusToken {
                 return false;
             }
 
-            return header.issuedAt <= Date.now();
+            return header.issuedAt <= (Date.now() + allowDelay);
         } catch (err) {
 
             return false;
