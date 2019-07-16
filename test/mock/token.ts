@@ -11,6 +11,7 @@ const chance: Chance.Chance = new Chance('mock-body');
 
 export const createMockBody = (
     username: string = chance.string(),
+    displayName: string = chance.string(),
     tags: string[] = [],
     organization: string = chance.string(),
     organizationTags: string[] = [],
@@ -21,6 +22,7 @@ export const createMockBody = (
 ): IBrontosaurusBody => ({
 
     username,
+    displayName,
     tags,
     groups,
     organization,

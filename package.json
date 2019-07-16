@@ -1,6 +1,6 @@
 {
 	"name": "@brontosaurus/core",
-	"version": "1.7.0",
+	"version": "1.8.0",
 	"description": ":zap: Lighting",
 	"main": "dist/index.js",
 	"scripts": {
@@ -20,7 +20,7 @@
 	},
 	"homepage": "https://github.com/SudoDotDog/Brontosaurus-Core#readme",
 	"dependencies": {
-		"@brontosaurus/definition": "^1.5.0"
+		"@brontosaurus/definition": "^1.6.0"
 	},
 	"devDependencies": {
 		"@sudoo/triforce": "^1.6.0"
