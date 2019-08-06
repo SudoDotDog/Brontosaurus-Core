@@ -6,13 +6,13 @@
 
 import { IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
 import { isNumber, isString } from "util";
-import { deserializeString, encryptString } from "./crypto";
+import { BrontosaurusKey, deserializeString, verifyString } from "./crypto";
 import { BrontosaurusSign } from "./sign";
 import { decouple, isExpired } from "./util";
 
 export class BrontosaurusToken {
 
-    public static withSecret(secret: string): BrontosaurusToken {
+    public static withSecret(secret: BrontosaurusKey): BrontosaurusToken {
 
         return new BrontosaurusToken(secret);
     }
@@ -46,9 +46,9 @@ export class BrontosaurusToken {
         }
     }
 
-    private readonly _secret: string;
+    private readonly _secret: BrontosaurusKey;
 
-    private constructor(secret: string) {
+    private constructor(secret: BrontosaurusKey) {
 
         this._secret = secret;
     }
@@ -123,9 +123,9 @@ export class BrontosaurusToken {
 
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
         const serialized: string = `${serializedHeader}.${serializedObject}`;
-        const encrypted: string = encryptString(serialized, this._secret);
+        const result: boolean = verifyString(serialized, hash, this._secret.public);
 
-        return encrypted === hash;
+        return result;
     }
 
     public validate(token: string, offset: number): boolean {

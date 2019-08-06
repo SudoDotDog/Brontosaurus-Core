@@ -4,14 +4,14 @@
  * @description Index
  */
 
-import { BrontosaurusDefinition, EncryptableObject, IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
-import { deserializeString, serializeString } from "./crypto";
+import { EncryptableObject, IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
+import { BrontosaurusKey, deserializeString, generateKey } from "./crypto";
 import { BrontosaurusToken } from "./token";
 import { decouple } from "./util";
 
 export class Brontosaurus {
 
-    public static token(secret: string): BrontosaurusToken {
+    public static token(secret: BrontosaurusKey): BrontosaurusToken {
 
         return BrontosaurusToken.withSecret(secret);
     }
@@ -46,9 +46,11 @@ export class Brontosaurus {
         return this.deserialize(serializedHeader);
     }
 
-    private static _definition: BrontosaurusDefinition = BrontosaurusDefinition.withEncoder(serializeString, deserializeString);
+    public static generateBrontosaurusKey(): BrontosaurusKey {
+
+        return generateKey();
+    }
 }
 
 export { BrontosaurusSign } from "./sign";
 export { BrontosaurusToken };
-

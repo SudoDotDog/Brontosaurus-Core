@@ -5,21 +5,21 @@
  */
 
 import { BrontosaurusDefinition, IBrontosaurusBody } from "@brontosaurus/definition";
-import { encryptString } from "./crypto";
+import { BrontosaurusKey, signString } from "./crypto";
 import { definition } from "./util";
 
 export class BrontosaurusSign {
 
-    public static create(key: string, body: IBrontosaurusBody, secret: string): BrontosaurusSign {
+    public static create(key: string, body: IBrontosaurusBody, secret: BrontosaurusKey): BrontosaurusSign {
 
         return new BrontosaurusSign(key, body, secret);
     }
 
     private readonly _key: string;
     private readonly _body: IBrontosaurusBody;
-    private readonly _secret: string;
+    private readonly _secret: BrontosaurusKey;
 
-    private constructor(key: string, body: IBrontosaurusBody, secret: string) {
+    private constructor(key: string, body: IBrontosaurusBody, secret: BrontosaurusKey) {
 
         this._key = key;
         this._body = body;
@@ -40,7 +40,7 @@ export class BrontosaurusSign {
         });
         const body: string = definition.body(this.body);
 
-        const encrypted: string = BrontosaurusDefinition.signWith(header, body, (content: string) => encryptString(content, this._secret));
+        const encrypted: string = BrontosaurusDefinition.signWith(header, body, (content: string) => signString(content, this._secret.private));
         return encrypted;
     }
 }

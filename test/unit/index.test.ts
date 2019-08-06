@@ -9,12 +9,13 @@ import { IBrontosaurusBody, IBrontosaurusHeader } from '@brontosaurus/definition
 import { expect } from 'chai';
 import * as Chance from 'chance';
 import { Brontosaurus, BrontosaurusSign } from '../../src';
-import { serializeString } from '../../src/crypto';
+import { BrontosaurusKey, generateKey, serializeString } from '../../src/crypto';
 import { createMockBody } from '../mock/token';
 
 describe('Given {Brontosaurus} class', (): void => {
 
     const chance: Chance.Chance = new Chance('brontosaurus-index');
+    const secret: BrontosaurusKey = generateKey();
 
     it('should be able to deserialize object', (): void => {
 
@@ -34,7 +35,6 @@ describe('Given {Brontosaurus} class', (): void => {
     it('should be able to decouple body', (): void => {
 
         const body: IBrontosaurusBody = createMockBody();
-        const secret: string = chance.string();
         const currentTime: number = Date.now();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(chance.string(), body, secret);
@@ -48,7 +48,6 @@ describe('Given {Brontosaurus} class', (): void => {
     it('should be able to decouple header', (): void => {
 
         const key: string = chance.string();
-        const secret: string = chance.string();
         const currentTime: number = Date.now();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);

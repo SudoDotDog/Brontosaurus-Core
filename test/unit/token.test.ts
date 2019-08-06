@@ -8,6 +8,7 @@
 import { IBrontosaurusBody } from '@brontosaurus/definition';
 import { expect } from 'chai';
 import * as Chance from 'chance';
+import { BrontosaurusKey, generateKey } from '../../src/crypto';
 import { BrontosaurusSign } from '../../src/sign';
 import { BrontosaurusToken } from '../../src/token';
 import { createMockBody } from '../mock/token';
@@ -15,11 +16,11 @@ import { createMockBody } from '../mock/token';
 describe('Given {BrontosaurusToken} class', (): void => {
 
     const chance: Chance.Chance = new Chance('brontosaurus-token');
+    const secret: BrontosaurusKey = generateKey();
 
     it('should be able to construct object', (): void => {
 
         const key: string = chance.string();
-        const secret: string = chance.string();
         const token: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
         expect(token).to.be.instanceOf(BrontosaurusToken);
@@ -30,7 +31,6 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const currentTime: number = Date.now();
 
         const key: string = chance.string();
-        const secret: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
         const token: string = sign.token(currentTime, currentTime);
@@ -46,7 +46,6 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
         const key: string = chance.string();
         const body: IBrontosaurusBody = createMockBody();
-        const secret: string = chance.string();
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
         const sign: BrontosaurusSign = clazz.sign(key, body);
@@ -62,7 +61,6 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const currentTime: number = Date.now();
 
         const key: string = chance.string();
-        const secret: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
         const token: string = sign.token(currentTime, currentTime);
@@ -78,7 +76,6 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const mockTime: number = Date.now() - 8000;
 
         const key: string = chance.string();
-        const secret: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
         const token: string = sign.token(mockTime, Date.now());
@@ -94,7 +91,6 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const mockTime: number = Date.now() + 8000;
 
         const key: string = chance.string();
-        const secret: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
         const token: string = sign.token(mockTime, mockTime);
@@ -111,10 +107,9 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const currentTime: number = Date.now();
 
         const key: string = chance.string();
-        const secret: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
-        const token: string = sign.token(mockTime, currentTime) + chance.string();
+        const token: string = sign.token(mockTime, currentTime).replace('a', 'b');
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 

@@ -8,18 +8,17 @@
 import { IBrontosaurusBody } from '@brontosaurus/definition';
 import { expect } from 'chai';
 import * as Chance from 'chance';
+import { BrontosaurusKey, generateKey } from '../../src/crypto';
 import { BrontosaurusSign } from '../../src/sign';
-import { MockEncryptableObject } from '../mock/encryptable-object';
 import { createMockBody } from '../mock/token';
 
 describe('Given {BrontosaurusSign} class', (): void => {
 
     const chance: Chance.Chance = new Chance('brontosaurus-sign');
+    const secret: BrontosaurusKey = generateKey();
 
     it('should be able to construct object', (): void => {
 
-        const secret: string = chance.string();
-        const mockObject: MockEncryptableObject = MockEncryptableObject.create();
         const body: IBrontosaurusBody = createMockBody();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(chance.string(), body, secret);
@@ -30,9 +29,6 @@ describe('Given {BrontosaurusSign} class', (): void => {
     it('should be able to generate token', (): void => {
 
         const currentTime: number = Date.now();
-
-        const secret: string = chance.string();
-        const mockObject: MockEncryptableObject = MockEncryptableObject.create();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(chance.string(), createMockBody(), secret);
         const token: string = sign.token(currentTime, currentTime);

@@ -8,42 +8,36 @@
 import { EncryptableObject } from '@brontosaurus/definition';
 import { expect } from 'chai';
 import * as Chance from 'chance';
-import { deserializeString, encryptObject, serializeString } from '../../src/crypto';
+import { BrontosaurusKey, deserializeString, generateKey, serializeString, signString, verifyString } from '../../src/crypto';
 
 describe('Given [Crypto] help functions', (): void => {
 
     const chance: Chance.Chance = new Chance('brontosaurus-crypto');
 
-    describe('Given [encryptObject] function', (): void => {
+    describe('Given [generateKey] function', (): void => {
 
-        it('should be able to encode object', (): void => {
+        it('should be able to generate a key', (): void => {
 
-            const key: string = chance.string();
-            const value: string = chance.string();
+            const result: BrontosaurusKey = generateKey();
 
-            const object: EncryptableObject = {
-                [key]: value,
-            };
-
-            const secret: string = chance.string();
-
-            const encrypted: string = encryptObject(object, secret);
-
-            expect(encrypted).to.be.equal(encryptObject(object, secret));
+            expect(result.public).to.be.include('END PUBLIC KEY');
+            expect(result.private).to.be.include('END PRIVATE KEY');
         });
+    });
 
-        it('should get different value with different secret', (): void => {
+    describe('Given [Encrypt] functions', (): void => {
 
-            const key: string = chance.string();
+        it('should be able to encode / verify object', (): void => {
+
             const value: string = chance.string();
 
-            const object: EncryptableObject = {
-                [key]: value,
-            };
+            const secret: BrontosaurusKey = generateKey();
 
-            const encrypted: string = encryptObject(object, chance.string());
+            const encoded: string = signString(value, secret.private);
+            const result: boolean = verifyString(value, encoded, secret.public);
 
-            expect(encrypted).to.be.not.equal(encryptObject(object, chance.string()));
+            // tslint:disable-next-line
+            expect(result).to.be.true;
         });
     });
 

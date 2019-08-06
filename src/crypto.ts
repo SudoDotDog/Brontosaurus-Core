@@ -4,22 +4,57 @@
  * @description Crypto
  */
 
-import { EncryptableObject } from "@brontosaurus/definition";
-import { createHmac, Hmac } from 'crypto';
+import { createHash, createSign, createVerify, generateKeyPairSync, Hash, privateEncrypt, publicDecrypt, Signer, Verify } from 'crypto';
 
-export const encryptObject = (object: EncryptableObject, secret: string): string => {
-
-    const json: string = JSON.stringify(object);
-
-    return encryptString(json, secret);
+export type BrontosaurusKey = {
+    readonly public: string;
+    readonly private: string;
 };
 
-export const encryptString = (target: string, secret: string): string => {
+export const generateKey = (): BrontosaurusKey => {
 
-    const hmac: Hmac = createHmac('sha1', secret);
-    hmac.update(target);
+    const result = generateKeyPairSync('rsa', {
+        modulusLength: 4096,
+        publicKeyEncoding: {
+            type: 'spki',
+            format: 'pem',
+        },
+        privateKeyEncoding: {
+            type: 'pkcs8',
+            format: 'pem',
+        },
+    } as any);
 
-    return hmac.digest('hex');
+    return {
+        public: result.publicKey,
+        private: result.privateKey,
+    };
+};
+
+export const md5String = (target: string): string => {
+
+    const hash: Hash = createHash('md5');
+    hash.update(target);
+
+    return hash.digest('hex');
+};
+
+export const signString = (target: string, privateKey: string): string => {
+
+    const signer: Signer = createSign('RSA-SHA256');
+    signer.update(target);
+    const sign: string = signer.sign(privateKey, 'hex');
+
+    return sign;
+};
+
+export const verifyString = (target: string, token: string, publicKey: string): boolean => {
+
+    const verify: Verify = createVerify('RSA-SHA256');
+    verify.update(target);
+    const result: boolean = verify.verify(publicKey, token, 'hex');
+
+    return result;
 };
 
 export const serializeString = (before: string): string => {
