@@ -52,5 +52,7 @@ export class Brontosaurus {
     }
 }
 
+export { BrontosaurusKey } from "./crypto";
 export { BrontosaurusSign } from "./sign";
 export { BrontosaurusToken };
+
