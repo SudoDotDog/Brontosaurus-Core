@@ -5,14 +5,10 @@
  * @package Unit Test
  */
 
-
 import { expect } from 'chai';
-import * as Chance from 'chance';
 import { isExpired } from '../../src/util';
 
 describe('Given [Util] help functions', (): void => {
-
-    const chance: Chance.Chance = new Chance('brontosaurus-util');
 
     it('should be able to check time expiration', (): void => {
 
