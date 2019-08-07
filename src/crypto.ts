@@ -14,7 +14,7 @@ export type BrontosaurusKey = {
 export const generateKey = (): BrontosaurusKey => {
 
     const result = generateKeyPairSync('rsa', {
-        modulusLength: 4096,
+        modulusLength: 2048,
         publicKeyEncoding: {
             type: 'spki',
             format: 'pem',
@@ -43,7 +43,7 @@ export const signString = (target: string, privateKey: string): string => {
 
     const signer: Signer = createSign('RSA-SHA256');
     signer.update(target);
-    const sign: string = signer.sign(privateKey, 'hex');
+    const sign: string = signer.sign(privateKey, 'base64');
 
     return sign;
 };
@@ -52,7 +52,7 @@ export const verifyString = (target: string, token: string, publicKey: string): 
 
     const verify: Verify = createVerify('RSA-SHA256');
     verify.update(target);
-    const result: boolean = verify.verify(publicKey, token, 'hex');
+    const result: boolean = verify.verify(publicKey, token, 'base64');
 
     return result;
 };

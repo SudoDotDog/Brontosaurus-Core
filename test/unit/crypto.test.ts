@@ -27,11 +27,22 @@ describe('Given [Crypto] help functions', (): void => {
 
     describe('Given [Encrypt] functions', (): void => {
 
+        const secret: BrontosaurusKey = generateKey();
+
         it('should be able to encode / verify object', (): void => {
 
             const value: string = chance.string();
 
-            const secret: BrontosaurusKey = generateKey();
+            const encoded: string = signString(value, secret.private);
+            const result: boolean = verifyString(value, encoded, secret.public);
+
+            // tslint:disable-next-line
+            expect(result).to.be.true;
+        });
+
+        it('should be able to encode / verify huge object', (): void => {
+
+            const value: string = chance.string().repeat(10000);
 
             const encoded: string = signString(value, secret.private);
             const result: boolean = verifyString(value, encoded, secret.public);
