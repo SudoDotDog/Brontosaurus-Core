@@ -23,7 +23,7 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-2.1.1.tgz#037206586856bc3d6a5218d2ce47881eb4b11a34"
   integrity sha512-xOta4GCbFaHmSIbn+thqTcqfS2koUiUkOsEblK8y13xQM2Eg3ziuJYboIIN6bVlEGj8wBUif4UcMs/8xGRYa8w==
 
-"@sudoo/triforce@^1.6.0":
+"@sudoo/triforce@^1.8.2":
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/@sudoo/triforce/-/triforce-1.8.2.tgz#397f18afdec80f1a18b93ccb905132aaa7e00da4"
   integrity sha512-Qdnv+wisAkzAKQRWTGYOlWKpLK6UBx7a4pZdblhAJ87nygks7UegujZs5C1+X2XTpNVWsXUGJFVK1XV9yt9DBw==

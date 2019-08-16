@@ -22,6 +22,12 @@ export class Brontosaurus {
         return JSON.parse(deserialized);
     }
 
+    public static decouple(token: string): [string, string, string] | null {
+
+        const decoupled: [string, string, string] | null = decouple(token);
+        return decoupled;
+    }
+
     public static decoupleBody(token: string): IBrontosaurusBody | null {
 
         const decoupled: [string, string, string] | null = decouple(token);
@@ -52,7 +58,7 @@ export class Brontosaurus {
     }
 }
 
-export { BrontosaurusKey } from "./crypto";
+export { BrontosaurusKey, signString, verifyString } from "./crypto";
 export { BrontosaurusSign } from "./sign";
 export { BrontosaurusToken };
 

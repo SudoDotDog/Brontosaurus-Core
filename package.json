@@ -1,6 +1,6 @@
 {
 	"name": "@brontosaurus/core",
-	"version": "2.1.1",
+	"version": "2.1.2",
 	"description": ":zap: Lighting",
 	"main": "dist/index.js",
 	"scripts": {
@@ -23,7 +23,7 @@
 		"@brontosaurus/definition": "^2.1.1"
 	},
 	"devDependencies": {
-		"@sudoo/triforce": "^1.6.0"
+		"@sudoo/triforce": "^1.8.2"
 	},
 	"nyc": {
 		"extension": [
