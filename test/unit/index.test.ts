@@ -56,6 +56,7 @@ describe('Given {Brontosaurus} class', (): void => {
         const deserialized: IBrontosaurusHeader | null = Brontosaurus.decoupleHeader(token);
 
         expect(deserialized).to.be.deep.equal({
+            alg: 'RS256',
             algorithm: 'RSA-SHA256',
             issuedAt: currentTime,
             expireAt: currentTime,

@@ -31,10 +31,21 @@ export class BrontosaurusSign {
         return this._body;
     }
 
+    public get publicKey(): string {
+
+        return this._secret.public;
+    }
+
+    public get privateKey(): string {
+
+        return this._secret.private;
+    }
+
     public token(expireAt: number = Date.now(), issuedAt: number = Date.now()): string {
 
         const header: string = definition.header({
-            algorithm: 'RSA-SHA256',
+            alg: "RS256",
+            algorithm: "RSA-SHA256",
             expireAt,
             issuedAt,
             key: this._key,
