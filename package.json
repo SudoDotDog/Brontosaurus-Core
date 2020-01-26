@@ -23,7 +23,7 @@
 		"@brontosaurus/definition": "^3.0.0"
 	},
 	"devDependencies": {
-		"@sudoo/triforce": "^2.0.3"
+		"@sudoo/triforce": "^2.1.0"
 	},
 	"nyc": {
 		"extension": [
