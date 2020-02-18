@@ -18,6 +18,7 @@ export const createMockBody = (
     groups: [] = [],
     infos: {} = {},
     beacons: {} = {},
+    modifies: [] = [],
     mint: string = "",
 ): IBrontosaurusBody => ({
 
@@ -29,5 +30,6 @@ export const createMockBody = (
     organizationTags,
     infos,
     beacons,
+    modifies,
     mint,
 });
