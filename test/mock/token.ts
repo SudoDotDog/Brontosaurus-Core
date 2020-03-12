@@ -23,6 +23,7 @@ export const createMockBody = (
 ): IBrontosaurusBody => ({
 
     username,
+    namespace: '',
     displayName,
     tags,
     groups,
