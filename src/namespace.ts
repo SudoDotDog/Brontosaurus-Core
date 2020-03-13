@@ -4,12 +4,6 @@
  * @description Namespace
  */
 
-export enum BRONTOSAURUS_NAMESPACE {
-
-    DEFAULT = "brontosaurus.default",
-    ADMIN = "brontosaurus.admin",
-}
-
 export const verifyNamespace = (namespace: string): boolean => {
 
     const matcher: RegExp = /^[A-Za-z0-9][A-Za-z0-9-.]+[A-Za-z0-9]$/;
