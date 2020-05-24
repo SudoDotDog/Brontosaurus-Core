@@ -20,11 +20,11 @@
 	},
 	"homepage": "https://github.com/SudoDotDog/Brontosaurus-Core#readme",
 	"dependencies": {
-		"@brontosaurus/definition": "^3.3.0"
+		"@brontosaurus/definition": "^3.4.0"
 	},
 	"devDependencies": {
 		"@sudoo/io": "^1.7.0",
-		"@sudoo/triforce": "^2.3.1"
+		"@sudoo/triforce": "^2.4.1"
 	},
 	"nyc": {
 		"extension": [
