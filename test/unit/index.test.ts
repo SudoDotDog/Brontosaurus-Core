@@ -38,7 +38,7 @@ describe('Given {Brontosaurus} class', (): void => {
         const currentTime: number = Date.now();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(chance.string(), body, secret);
-        const token: string = sign.token(currentTime, currentTime);
+        const token: string = sign.token(chance.string(), currentTime, currentTime);
 
         const deserialized: IBrontosaurusBody | null = Brontosaurus.decoupleBody(token);
 
@@ -51,7 +51,7 @@ describe('Given {Brontosaurus} class', (): void => {
         const currentTime: number = Date.now();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
-        const token: string = sign.token(currentTime, currentTime);
+        const token: string = sign.token(chance.string(), currentTime, currentTime);
 
         const deserialized: IBrontosaurusHeader | null = Brontosaurus.decoupleHeader(token);
 

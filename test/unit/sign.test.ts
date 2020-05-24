@@ -31,8 +31,8 @@ describe('Given {BrontosaurusSign} class', (): void => {
         const currentTime: number = Date.now();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(chance.string(), createMockBody(), secret);
-        const token: string = sign.token(currentTime, currentTime);
+        const token: string = sign.token(chance.string(), currentTime, currentTime);
 
-        expect(token).to.be.equal(sign.token(currentTime, currentTime));
+        expect(token).to.be.equal(sign.token(chance.string(), currentTime, currentTime));
     });
 });

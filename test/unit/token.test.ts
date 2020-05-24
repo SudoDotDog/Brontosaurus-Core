@@ -33,7 +33,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const key: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
-        const token: string = sign.token(currentTime, currentTime);
+        const token: string = sign.token(chance.string(), currentTime, currentTime);
 
         const result: string | null = BrontosaurusToken.key(token);
 
@@ -49,7 +49,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
         const sign: BrontosaurusSign = clazz.sign(key, body);
-        const token: string = sign.token(currentTime, currentTime);
+        const token: string = sign.token(chance.string(), currentTime, currentTime);
 
         const result: string | null = BrontosaurusToken.key(token);
 
@@ -63,7 +63,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const key: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
-        const token: string = sign.token(currentTime, currentTime);
+        const token: string = sign.token(chance.string(), currentTime, currentTime);
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
@@ -73,12 +73,13 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
     it('should be invalid if expired', (): void => {
 
+        // tslint:disable-next-line: no-magic-numbers
         const mockTime: number = Date.now() - 8000;
 
         const key: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
-        const token: string = sign.token(mockTime, Date.now());
+        const token: string = sign.token(chance.string(), mockTime, Date.now());
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
@@ -88,12 +89,13 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
     it('should be invalid if time traveling', (): void => {
 
+        // tslint:disable-next-line: no-magic-numbers
         const mockTime: number = Date.now() + 8000;
 
         const key: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
-        const token: string = sign.token(mockTime, mockTime);
+        const token: string = sign.token(chance.string(), mockTime, mockTime);
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
@@ -109,7 +111,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
         const key: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
-        const token: string = sign.token(mockTime, currentTime).replace('a', 'b');
+        const token: string = sign.token(chance.string(), mockTime, currentTime).replace('a', 'b');
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 

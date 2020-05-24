@@ -41,15 +41,21 @@ export class BrontosaurusSign {
         return this._secret.private;
     }
 
-    public token(expireAt: number = Date.now(), issuedAt: number = Date.now()): string {
+    public token(
+        attempt: string,
+        expireAt: number = Date.now(),
+        issuedAt: number = Date.now(),
+    ): string {
 
         const header: string = definition.header({
             alg: "RS256",
             algorithm: "RSA-SHA256",
+            attempt,
             expireAt,
             issuedAt,
             key: this._key,
         });
+
         const body: string = definition.body(this.body);
 
         const encrypted: string = BrontosaurusDefinition.signWith(
