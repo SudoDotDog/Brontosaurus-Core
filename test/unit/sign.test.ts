@@ -29,10 +29,11 @@ describe('Given {BrontosaurusSign} class', (): void => {
     it('should be able to generate token', (): void => {
 
         const currentTime: number = Date.now();
+        const attempt: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(chance.string(), createMockBody(), secret);
-        const token: string = sign.token(chance.string(), currentTime, currentTime);
+        const token: string = sign.token(attempt, currentTime, currentTime);
 
-        expect(token).to.be.equal(sign.token(chance.string(), currentTime, currentTime));
+        expect(token).to.be.equal(sign.token(attempt, currentTime, currentTime));
     });
 });

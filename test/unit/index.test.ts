@@ -49,15 +49,17 @@ describe('Given {Brontosaurus} class', (): void => {
 
         const key: string = chance.string();
         const currentTime: number = Date.now();
+        const attempt: string = chance.string();
 
         const sign: BrontosaurusSign = BrontosaurusSign.create(key, createMockBody(), secret);
-        const token: string = sign.token(chance.string(), currentTime, currentTime);
+        const token: string = sign.token(attempt, currentTime, currentTime);
 
         const deserialized: IBrontosaurusHeader | null = Brontosaurus.decoupleHeader(token);
 
         expect(deserialized).to.be.deep.equal({
             alg: 'RS256',
             algorithm: 'RSA-SHA256',
+            attempt,
             issuedAt: currentTime,
             expireAt: currentTime,
             key,
