@@ -36,6 +36,7 @@ export class Brontosaurus {
             return null;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
 
         try {
@@ -56,6 +57,7 @@ export class Brontosaurus {
             return null;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
 
         try {

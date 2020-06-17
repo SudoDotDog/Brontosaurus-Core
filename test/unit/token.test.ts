@@ -20,7 +20,6 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
     it('should be able to construct object', (): void => {
 
-        const key: string = chance.string();
         const token: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
         expect(token).to.be.instanceOf(BrontosaurusToken);
@@ -67,13 +66,13 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
-        // tslint:disable-next-line
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions, @typescript-eslint/no-magic-numbers
         expect(clazz.validate(token, 5000)).to.be.true;
     });
 
     it('should be invalid if expired', (): void => {
 
-        // tslint:disable-next-line: no-magic-numbers
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         const mockTime: number = Date.now() - 8000;
 
         const key: string = chance.string();
@@ -83,13 +82,13 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
-        // tslint:disable-next-line
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions, @typescript-eslint/no-magic-numbers
         expect(clazz.validate(token, 5000)).to.be.false;
     });
 
     it('should be invalid if time traveling', (): void => {
 
-        // tslint:disable-next-line: no-magic-numbers
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         const mockTime: number = Date.now() + 8000;
 
         const key: string = chance.string();
@@ -99,7 +98,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
-        // tslint:disable-next-line
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions, @typescript-eslint/no-magic-numbers
         expect(clazz.validate(token, 5000)).to.be.false;
     });
 
@@ -115,7 +114,7 @@ describe('Given {BrontosaurusToken} class', (): void => {
 
         const clazz: BrontosaurusToken = BrontosaurusToken.withSecret(secret);
 
-        // tslint:disable-next-line
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions, @typescript-eslint/no-magic-numbers
         expect(clazz.validate(token, 5000)).to.be.false;
     });
 });

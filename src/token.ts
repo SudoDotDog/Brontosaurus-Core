@@ -25,6 +25,7 @@ export class BrontosaurusToken {
             return null;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
 
         try {
@@ -71,6 +72,7 @@ export class BrontosaurusToken {
             return false;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
 
         try {
@@ -100,6 +102,7 @@ export class BrontosaurusToken {
             return null;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
 
         try {

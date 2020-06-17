@@ -36,7 +36,7 @@ describe('Given [Crypto] help functions', (): void => {
             const encoded: string = signString(value, secret.private);
             const result: boolean = verifyString(value, encoded, secret.public);
 
-            // tslint:disable-next-line
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             expect(result).to.be.true;
         });
 
@@ -47,7 +47,7 @@ describe('Given [Crypto] help functions', (): void => {
             const encoded: string = signString(value, secret.private);
             const result: boolean = verifyString(value, encoded, secret.public);
 
-            // tslint:disable-next-line
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
             expect(result).to.be.true;
         });
     });

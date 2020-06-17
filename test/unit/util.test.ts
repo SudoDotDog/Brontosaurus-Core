@@ -16,7 +16,7 @@ describe('Given [Util] help functions', (): void => {
 
         const period: number = 100;
 
-        // tslint:disable-next-line
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         expect(isExpired(current, period)).to.be.false;
     });
 });
