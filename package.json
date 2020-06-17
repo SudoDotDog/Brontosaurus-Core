@@ -2,10 +2,6 @@
 	"name": "@brontosaurus/core",
 	"version": "3.4.0",
 	"description": ":zap: Lighting",
-	"main": "dist/index.js",
-	"scripts": {
-		"test": "mocha"
-	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/SudoDotDog/Brontosaurus-Core.git"
