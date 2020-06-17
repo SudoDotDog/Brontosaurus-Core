@@ -23,8 +23,8 @@
 		"@brontosaurus/definition": "^3.4.0"
 	},
 	"devDependencies": {
-		"@sudoo/io": "^1.7.0",
-		"@sudoo/triforce": "^2.4.1"
+		"@sudoo/io": "^1.8.0",
+		"@sudoo/triforce": "^2.7.2"
 	},
 	"nyc": {
 		"extension": [
@@ -40,9 +40,6 @@
 			"text-summary"
 		],
 		"report-dir": "coverage",
-		"require": [
-			"./test/tshook.js"
-		],
 		"sourceMap": true
 	}
 }
