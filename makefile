@@ -64,6 +64,10 @@ clean-linux:
 	@rm -rf .nyc_output
 	@rm -rf coverage
 
-publish: install tests license build
+publish: install tests lint license build
 	@echo "[INFO] Publishing package"
 	@cd app && npm publish --access=public
+
+publish-dry-run: install tests lint license build
+	@echo "[INFO] Publishing package (Dry Run)"
+	@cd app && npm publish --access=public --dry-run
