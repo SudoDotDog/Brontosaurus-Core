@@ -5,7 +5,6 @@
  */
 
 import { IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
-import { isNumber, isString } from "util";
 import { BrontosaurusKey, deserializeString, verifyString } from "./crypto";
 import { TokenStringTuple } from "./declare";
 import { BrontosaurusSign } from "./sign";
@@ -33,7 +32,7 @@ export class BrontosaurusToken {
 
             const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
 
-            if (!isString(header.key)) {
+            if (typeof header.key !== 'string') {
                 return null;
             }
 
@@ -80,7 +79,9 @@ export class BrontosaurusToken {
 
             const header: IBrontosaurusHeader = JSON.parse(deserializeString(serializedHeader));
 
-            if (!isNumber(header.issuedAt) || !isNumber(header.expireAt) || !isString(header.key)) {
+            if (typeof header.issuedAt !== 'number'
+                || typeof header.expireAt !== 'number'
+                || typeof header.key !== 'string') {
                 return false;
             }
 
