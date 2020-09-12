@@ -7,6 +7,7 @@
 import { IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
 import { isNumber, isString } from "util";
 import { BrontosaurusKey, deserializeString, verifyString } from "./crypto";
+import { TokenStringTuple } from "./declare";
 import { BrontosaurusSign } from "./sign";
 import { decouple, isExpired } from "./util";
 
@@ -19,14 +20,14 @@ export class BrontosaurusToken {
 
     public static key(token: string): string | null {
 
-        const decoupled: [string, string, string] | null = decouple(token);
+        const decoupled: TokenStringTuple | null = decouple(token);
 
         if (!decoupled) {
             return null;
         }
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
+        const [serializedHeader, serializedObject, hash]: TokenStringTuple = decoupled;
 
         try {
 
@@ -66,14 +67,14 @@ export class BrontosaurusToken {
 
     public clock(token: string, offset: number, allowDelay: number = 0): boolean {
 
-        const decoupled: [string, string, string] | null = decouple(token);
+        const decoupled: TokenStringTuple | null = decouple(token);
 
         if (!decoupled) {
             return false;
         }
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
+        const [serializedHeader, serializedObject, hash]: TokenStringTuple = decoupled;
 
         try {
 
@@ -96,14 +97,14 @@ export class BrontosaurusToken {
 
     public body(token: string): IBrontosaurusBody | null {
 
-        const decoupled: [string, string, string] | null = decouple(token);
+        const decoupled: TokenStringTuple | null = decouple(token);
 
         if (!decoupled) {
             return null;
         }
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
+        const [serializedHeader, serializedObject, hash]: TokenStringTuple = decoupled;
 
         try {
 
@@ -118,13 +119,13 @@ export class BrontosaurusToken {
 
     public check(token: string): boolean {
 
-        const decoupled: [string, string, string] | null = decouple(token);
+        const decoupled: TokenStringTuple | null = decouple(token);
 
         if (!decoupled) {
             return false;
         }
 
-        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
+        const [serializedHeader, serializedObject, hash]: TokenStringTuple = decoupled;
         const serialized: string = `${serializedHeader}.${serializedObject}`;
         const result: boolean = verifyString(serialized, hash, this._secret.public);
 
