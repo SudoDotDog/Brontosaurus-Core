@@ -20,7 +20,7 @@
 	},
 	"devDependencies": {
 		"@sudoo/io": "^1.8.0",
-		"@sudoo/triforce": "^2.8.6"
+		"@sudoo/triforce": "^2.8.7"
 	},
 	"nyc": {
 		"extension": [
