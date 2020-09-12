@@ -31,14 +31,6 @@ export const generateKey = (): BrontosaurusKey => {
     };
 };
 
-export const md5String = (target: string): string => {
-
-    const hash: Hash = createHash('md5');
-    hash.update(target);
-
-    return hash.digest('hex');
-};
-
 export const signString = (target: string, privateKey: string): string => {
 
     const signer: Signer = createSign('RSA-SHA256');
