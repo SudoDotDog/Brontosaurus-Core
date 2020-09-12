@@ -6,6 +6,7 @@
 
 import { EncryptableObject, IBrontosaurusBody, IBrontosaurusHeader } from "@brontosaurus/definition";
 import { BrontosaurusKey, deserializeString, generateKey } from "./crypto";
+import { TokenStringTuple } from "./declare";
 import { BrontosaurusToken } from "./token";
 import { decouple } from "./util";
 
@@ -22,22 +23,22 @@ export class Brontosaurus {
         return JSON.parse(deserialized);
     }
 
-    public static decouple(token: string): [string, string, string] | null {
+    public static decouple(token: string): TokenStringTuple | null {
 
-        const decoupled: [string, string, string] | null = decouple(token);
+        const decoupled: TokenStringTuple | null = decouple(token);
         return decoupled;
     }
 
     public static decoupleBody(token: string): IBrontosaurusBody | null {
 
-        const decoupled: [string, string, string] | null = decouple(token);
+        const decoupled: TokenStringTuple | null = decouple(token);
 
         if (!decoupled) {
             return null;
         }
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
+        const [serializedHeader, serializedObject, hash]: TokenStringTuple = decoupled;
 
         try {
 
@@ -51,14 +52,14 @@ export class Brontosaurus {
 
     public static decoupleHeader(token: string): IBrontosaurusHeader | null {
 
-        const decoupled: [string, string, string] | null = decouple(token);
+        const decoupled: TokenStringTuple | null = decouple(token);
 
         if (!decoupled) {
             return null;
         }
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [serializedHeader, serializedObject, hash]: [string, string, string] = decoupled;
+        const [serializedHeader, serializedObject, hash]: TokenStringTuple = decoupled;
 
         try {
 

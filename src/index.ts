@@ -6,6 +6,7 @@
 
 export { Brontosaurus } from "./core";
 export { BrontosaurusKey, signString, verifyString } from "./crypto";
+export * from "./declare";
 export * from "./namespace";
 export { BrontosaurusSign } from "./sign";
 export { BrontosaurusToken } from "./token";
