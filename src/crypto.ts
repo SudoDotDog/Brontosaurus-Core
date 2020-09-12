@@ -4,7 +4,7 @@
  * @description Crypto
  */
 
-import { createHash, createSign, createVerify, generateKeyPairSync, Hash, Signer, Verify } from 'crypto';
+import { createSign, createVerify, generateKeyPairSync, Signer, Verify } from 'crypto';
 
 export type BrontosaurusKey = {
     readonly public: string;
