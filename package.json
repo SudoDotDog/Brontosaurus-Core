@@ -1,6 +1,6 @@
 {
 	"name": "@brontosaurus/core",
-	"version": "3.4.0",
+	"version": "3.4.1",
 	"description": ":zap: Lighting",
 	"repository": {
 		"type": "git",
@@ -16,7 +16,7 @@
 	},
 	"homepage": "https://github.com/SudoDotDog/Brontosaurus-Core#readme",
 	"dependencies": {
-		"@brontosaurus/definition": "^3.4.0"
+		"@brontosaurus/definition": "^3.4.1"
 	},
 	"devDependencies": {
 		"@sudoo/io": "^1.8.0",
