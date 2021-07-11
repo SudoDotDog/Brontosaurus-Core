@@ -19,7 +19,8 @@
 		"@brontosaurus/definition": "^3.4.1"
 	},
 	"devDependencies": {
-		"@sudoo/io": "^1.8.0",
+		"@sudoo/build-utils": "^1.0.0",
+		"@sudoo/license": "^1.1.0",
 		"@sudoo/triforce": "^2.9.28"
 	},
 	"nyc": {
